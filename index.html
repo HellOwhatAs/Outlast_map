@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>灯泡</title>
+    <style>
+        #p1{
+            bottom:5%;
+            right: 5%;
+            height: 5%;
+            width: 5%;
+            position:fixed;
+        }
+        #p2{
+            bottom:15%;
+            right: 5%;
+            height: 5%;
+            width: 5%;
+            position:fixed;
+        }
+        #p3{
+            bottom:25%;
+            right: 5%;
+            height: 5%;
+            width: 5%;
+            position:fixed;
+        }
+    </style>
+</head>
+<body>
+    <img id = "main" src="./asserts/25b2436ce28d18eeb52a07265cde1189a0a25e20.jpg"></img>
+    <button id="p1" onclick="full_figure()" disabled="true">全图</button>
+    <button id="p2" onclick="down_stairs()">下楼</button>
+    <button id="p3" onclick="up_stairs()">上楼</button>
+    <script>
+        var data = {
+            "全图1F":'./asserts/25b2436ce28d18eeb52a07265cde1189a0a25e20.jpg',
+            "全图2F":'./asserts/ed3b4aaf5417f3c8f09a5d13baee8ffb561787aa.jpg',
+            '全图3F':'./asserts/10a51f033d276aacca90e399df991c5aee62bdf0.jpg',
+            '全图4F':'./asserts/83d3a17e069f7ee773b471f8a2705453322f88ec.jpg',
+            '全图B1':'./asserts/265c73bfee88718e6b3071d6a7526cecbf41038a.jpg',
+            '全图B2':'./asserts/1723a23253989a76ad024ac78ad0e622dd1f6822.jpg',
+            '内庭院':'./asserts/2873fe02f7f05623359b80c391489151f5a73861.jpg',
+            '行政楼1F':'./asserts/e39f1b6440ee40b861b3ffee38bced025dca89b2.jpg',
+            '行政楼2F':'./asserts/7126f02823db18b9b7f376c57fd6263f6a1542a8.jpg',
+            '行政楼3F':'./asserts/c1b3905261ce505f9c0a59f8bce6da36441b6f7b.jpg',
+            '行政楼B1':'./asserts/83cf6d25a708ff02db45baeeaed881a1c037efa4.jpg',
+            '监狱1F':'./asserts/a4975f786202a2b1ed6885e425fd0d5b31bc3260.jpg',
+            '监狱2F':'./asserts/0aaad305667e85a4c2ac26cd285eddd84aeff3f2.jpg',
+            '监狱3F':'./asserts/c981f8e8ed3bfa4774f8ad134dcf48936d0a9007.jpg',
+            '监狱4F':'./asserts/7ddc8fa9386904cdbc955b104f00a7e868d68ab1.jpg',
+            '男病房1F':'./asserts/a6fac048d1b5029abcdd3e30c0ba03c6c9471a3d.jpg',
+            '男病房2F':'./asserts/ccc96d35c425735741539b9b415212d094fcf10f.jpg',
+            '男病房3F':'./asserts/3a4f72854c188e424f6323b5a8de28c99e1eb47b.jpg',
+            '男病房B1':'./asserts/9e4db367efc149659dce577d9fb661bc7ee468ac.jpg',
+            '女病房1F':'./asserts/982fd0890112be5cb9fac2f16d6015186123d19a.jpg',
+            '女病房2F':'./asserts/95dd27a021998bfb9deaa0b1d3877b001d0eea87.jpg',
+            '女病房3F':'./asserts/9629595a965c3da9743009f11696a402458c8d58.jpg',
+            '女病房B1':'./asserts/afcd2730fd3a40cb78ee6425b67573b56fb50a12.jpg',
+            '下水道B1':'./asserts/642372283931ea0452643cf6069c2dcc56fd42ea.jpg',
+            '下水道B2':'./asserts/9b9113655dd114d7fec4a9da4447e6cecf3a9196.jpg'
+        };
+        var current_pos = "全图1F";
+        var main_img = document.getElementById("main");
+        var p1 = document.getElementById("p1");
+        var p2 = document.getElementById("p2");
+        var p3 = document.getElementById("p3");
+        
+        function to_target(targrt) {
+            p1.removeAttribute('disabled');
+            p2.removeAttribute('disabled');
+            p3.removeAttribute('disabled');
+            switch (targrt) {
+                case"全图1F":
+                    p1.setAttribute('disabled', true);
+                    break;
+                case"全图2F":
+                    p1.setAttribute('disabled', true);
+                    break;
+                case'全图3F':
+                    p1.setAttribute('disabled', true);
+                    break;
+                case'全图4F':
+                    p1.setAttribute('disabled', true);
+                    p3.setAttribute('disabled', true);
+                    break;
+                case'全图B1':
+                    p1.setAttribute('disabled', true);
+                    break;
+                case'全图B2':
+                    p1.setAttribute('disabled', true);
+                    p2.setAttribute('disabled', true);
+                    break;
+                case'内庭院':
+                    p2.setAttribute('disabled', true);
+                    p3.setAttribute('disabled', true);
+                    break;
+                case'行政楼3F':
+                    p3.setAttribute('disabled', true);
+                    break;
+                case'行政楼B1':
+                    p2.setAttribute('disabled', true);
+                    break;
+                case'监狱1F':
+                    p2.setAttribute('disabled', true);
+                    break;
+                case'监狱4F':
+                    p3.setAttribute('disabled', true);
+                    break;
+                case'男病房3F':
+                    p3.setAttribute('disabled', true);
+                    break;
+                case'男病房B1':
+                    p2.setAttribute('disabled', true);
+                    break;
+                case'女病房3F':
+                    p3.setAttribute('disabled', true);
+                    break;
+                case'女病房B1':
+                    p2.setAttribute('disabled', true);
+                    break;
+                case'下水道B1':
+                    p3.setAttribute('disabled', true);
+                    break;
+                case'下水道B2':
+                    p2.setAttribute('disabled', true);
+                    break;
+                default:
+                    break;
+            }
+            main_img.src =  data[targrt];
+            current_pos = targrt;
+        }
+        function click_in(e, xmin, xmax, ymin, ymax, targrt) {
+            if (e.pageX >=xmin && e.pageX <= xmax && e.pageY >= ymin && e.pageY <= ymax){
+                to_target(targrt);
+            }
+        }
+        main_img.addEventListener("click", function (e) {
+            console.log(e.pageX, e.pageY);
+            switch (current_pos) {
+                case "全图1F":
+                    click_in(e, 25, 284, 230, 621, "男病房1F");
+                    click_in(e, 498, 786, 77, 307, "监狱1F");
+                    click_in(e, 286, 775, 340, 573, "内庭院");
+                    click_in(e, 378, 829, 605, 741, "行政楼1F");
+                    click_in(e, 924, 1182, 315, 624, "女病房1F");
+                    break;
+                case "全图2F":
+                    click_in(e, 25, 284, 230, 621, "男病房2F");
+                    click_in(e, 498, 786, 77, 307, "监狱2F");
+                    click_in(e, 378, 829, 605, 741, "行政楼2F");
+                    click_in(e, 924, 1182, 315, 624, "女病房2F");
+                    break;
+                case "全图3F":
+                    click_in(e, 25, 284, 230, 621, "男病房3F");
+                    click_in(e, 498, 786, 77, 307, "监狱3F");
+                    click_in(e, 378, 829, 605, 741, "行政楼3F");
+                    click_in(e, 924, 1182, 315, 624, "女病房3F");
+                    break;
+                case "全图4F":
+                    click_in(e, 498, 786, 77, 307, "监狱4F");
+                    break;
+                case "全图B1":
+                    click_in(e, 25, 284, 230, 621, "男病房B1");
+                    click_in(e, 378, 829, 605, 741, "行政楼B1");
+                    click_in(e, 924, 1182, 315, 624, "女病房B1");
+                    click_in(e, 584, 898, 75, 593, '下水道B1');
+                    break;
+                case "全图B2":
+                    click_in(e, 83, 856, 229, 664, '下水道B2');
+                    break;
+                default:
+                    break;
+            }
+        });
+        function full_figure(){
+            switch (current_pos) {
+                case "男病房1F":
+                case "监狱1F":
+                case "内庭院":
+                case "行政楼1F":
+                case "女病房1F":
+                    to_target('全图1F');
+                    break;
+                case "男病房2F":
+                case "监狱2F":
+                case "行政楼2F":
+                case "女病房2F":
+                    to_target('全图2F');
+                    break;
+                case "男病房3F":
+                case "监狱3F":
+                case "行政楼3F":
+                case "女病房3F":
+                    to_target('全图3F');
+                    break;
+                case "监狱4F":
+                    to_target('全图4F');
+                    break;
+                case "男病房B1":
+                case "行政楼B1":
+                case "女病房B1":
+                case '下水道B1':
+                    to_target('全图B1');
+                    break;
+                case "下水道B2":
+                    to_target('全图B2');
+                    break;
+                default:
+                    break;
+            }
+        }
+        function down_stairs(){
+            switch (current_pos) {
+                case "全图B1":
+                    to_target("全图B2");
+                    break;
+                case "全图1F":
+                    to_target('全图B1');
+                    break;
+                case "全图2F":
+                    to_target('全图1F');
+                    break;
+                case "全图3F":
+                    to_target('全图2F');
+                    break;
+                case "全图4F":
+                    to_target('全图3F');
+                    break;
+                case '行政楼1F':
+                    to_target('行政楼B1');
+                    break;
+                case '行政楼2F':
+                    to_target('行政楼1F');
+                    break;
+                case '行政楼3F':
+                    to_target('行政楼2F');
+                    break;
+                case '监狱2F':
+                    to_target('监狱1F');
+                    break;
+                case '监狱3F':
+                    to_target('监狱2F');
+                    break;
+                case '监狱4F':
+                    to_target('监狱3F');
+                    break;
+                case '男病房1F':
+                    to_target('男病房B1');
+                    break;
+                case '男病房2F':
+                    to_target('男病房1F');
+                    break;
+                case '男病房3F':
+                    to_target('男病房2F');
+                    break;
+                case '女病房1F':
+                    to_target('女病房B1');
+                    break;
+                case '女病房2F':
+                    to_target('女病房1F');
+                    break;
+                case '女病房3F':
+                    to_target('女病房2F');
+                    break;
+                case '下水道B1':
+                    to_target('下水道B2');
+                    break;
+                default:
+                    break;
+            }
+        };
+        function up_stairs(){
+            switch (current_pos) {
+                case "全图B2":
+                    to_target('全图B1');
+                    break;
+                case "全图B1":
+                    to_target('全图1F');
+                    break;
+                case "全图1F":
+                    to_target('全图2F');
+                    break;
+                case "全图2F":
+                    to_target('全图3F');
+                    break;
+                case "全图3F":
+                    to_target('全图4F');
+                    break;
+                case '行政楼B1':
+                    to_target('行政楼1F');
+                    break;
+                case '行政楼1F':
+                    to_target('行政楼2F');
+                    break;
+                case '行政楼2F':
+                    to_target('行政楼3F');
+                    break;
+                case '监狱1F':
+                    to_target('监狱2F');
+                    break;
+                case '监狱2F':
+                    to_target('监狱3F');
+                    break;
+                case '监狱3F':
+                    to_target('监狱4F');
+                    break;
+                case '男病房B1':
+                    to_target('男病房1F');
+                    break;
+                case '男病房1F':
+                    to_target('男病房2F');
+                    break;
+                case '男病房2F':
+                    to_target('男病房3F');
+                    break;
+                case '女病房B1':
+                    to_target('女病房1F');
+                    break;
+                case '女病房1F':
+                    to_target('女病房2F');
+                    break;
+                case '女病房2F':
+                    to_target('女病房3F');
+                    break;
+                case '下水道B2':
+                    to_target('下水道B1');
+                    break;
+                default:
+                    break;
+            }
+        };
+    </script>
+</body>
+</html>
